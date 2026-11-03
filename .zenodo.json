@@ -1,0 +1,44 @@
+{
+  "title": "omics-graph-priors: reproduction code",
+  "upload_type": "software",
+  "description": "Reproduction code and configurations for a controlled two-cancer benchmark of biological gene graphs in multiomics graph autoencoders (TCGA HNSCC and BRCA).",
+  "creators": [
+    {
+      "name": "Patel, Vatsal",
+      "affiliation": "HawkFranklin Research"
+    }
+  ],
+  "access_right": "open",
+  "license": "Apache-2.0",
+  "keywords": [
+    "multi-omics",
+    "graph neural networks",
+    "graph autoencoders",
+    "cancer genomics",
+    "TCGA",
+    "reproducibility",
+    "bioinformatics",
+    "co-expression",
+    "biological networks"
+  ],
+  "related_identifiers": [
+    {
+      "scheme": "url",
+      "identifier": "https://github.com/HawkFranklin-Research/omics-graph-priors",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    },
+    {
+      "scheme": "url",
+      "identifier": "https://huggingface.co/datasets/HawkFranklin-Research/omics-graph-priors-tcga",
+      "relation": "isSupplementTo",
+      "resource_type": "dataset"
+    },
+    {
+      "scheme": "url",
+      "identifier": "https://huggingface.co/HawkFranklin-Research/omics-graph-priors-models",
+      "relation": "isSupplementTo",
+      "resource_type": "model"
+    }
+  ]
+}

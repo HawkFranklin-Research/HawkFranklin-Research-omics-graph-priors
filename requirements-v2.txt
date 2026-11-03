@@ -1,0 +1,17 @@
+numpy
+pandas
+pyarrow
+scipy
+scikit-learn
+scikit-survival
+statsmodels
+lifelines
+torch
+torch-geometric
+pyyaml
+matplotlib
+seaborn
+gseapy==1.3.1
+huggingface_hub
+tabulate
+# mofapy2 is optional and disabled by default.

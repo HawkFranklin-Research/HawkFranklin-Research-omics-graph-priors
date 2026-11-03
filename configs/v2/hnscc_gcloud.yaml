@@ -1,0 +1,12 @@
+extends: base.yaml
+experiment_name: hnscc_v2_e1
+
+data:
+  processed_root: data/hf_hnscc
+  reference_root: data/hf_hnscc/references
+  output_root: outputs/v2
+
+resources:
+  threads: 6
+  device: cuda
+  batch_size: 8

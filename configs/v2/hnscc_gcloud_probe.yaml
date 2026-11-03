@@ -1,0 +1,16 @@
+extends: base.yaml
+experiment_name: hnscc_v2_probe
+
+data:
+  processed_root: data/hf_hnscc
+  reference_root: data/hf_hnscc/references
+  output_root: outputs/v2
+
+cube: {max_patients: 60}
+cv: {n_folds: 2, n_repeats: 1}
+nodes: {top_n: 100}
+training: {epochs: 1, patience: null}
+evaluation: {bootstrap_n: 20}
+interpret: {patients_per_fold: 5, permutations: 10}
+checks: {relaxed: true}
+resources: {threads: 4, device: cuda, batch_size: 8}

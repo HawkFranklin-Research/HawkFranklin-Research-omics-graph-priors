@@ -1,0 +1,10 @@
+extends: base.yaml
+experiment_name: brca_v2_smoke
+cancers: [BRCA]
+cube: {max_patients: 240}
+cv: {stratify_label: SUBTYPE, n_folds: 2, n_repeats: 1}
+nodes: {top_n: 200}
+training: {epochs: 3, patience: null}
+evaluation: {bootstrap_n: 50}
+interpret: {patients_per_fold: 10, permutations: 50}
+checks: {relaxed: true}

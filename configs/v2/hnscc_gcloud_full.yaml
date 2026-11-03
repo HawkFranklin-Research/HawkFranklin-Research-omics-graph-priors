@@ -1,0 +1,6 @@
+extends: base.yaml
+experiment_name: hnscc_v2_gcloud
+enable_optional_conditions: true
+nodes: {top_n: null}
+cv: {n_repeats: 5}
+interpret: {patients_per_fold: null}

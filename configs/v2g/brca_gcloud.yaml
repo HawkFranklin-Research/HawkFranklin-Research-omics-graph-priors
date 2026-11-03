@@ -1,0 +1,15 @@
+extends: base.yaml
+experiment_name: brca_v2_e5
+cancers: [BRCA]
+cv: {stratify_label: SUBTYPE}
+resources: {threads: 6, device: cuda, batch_size: 8}
+data:
+  processed_root: data/hf_tcga
+  reference_root: data/hf_tcga/references
+  output_root: outputs/v2
+  hf:
+    repo: VatsalPatel18/multiomics-hnscc-processed
+    revision: 'a4ea22bafc5a838f550589150670859b1a5b170f'
+    local_dir: data/hf_tcga
+    allow_patterns: ['harmonized/tcga/BRCA/*', 'harmonized/MANIFEST.csv', 'clinical/*', 'references/*']
+cloud: {probe_config: configs/v2g/brca_gcloud_probe.yaml}

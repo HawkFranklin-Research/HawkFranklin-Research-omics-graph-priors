@@ -1,0 +1,59 @@
+experiment_name: hnscc_v2
+data:
+  processed_root: /home/prime/Documents/g3/c-5/gpt/processed
+  reference_root: data/references
+  output_root: outputs/v2
+cancers: [HNSCC]
+cohorts: [tcga]
+resources: {threads: 6, device: cuda, batch_size: 8}
+references:
+  hgnc: {filename: hgnc_complete_set.txt, url: 'https://storage.googleapis.com/public-download-files/hgnc/tsv/tsv/hgnc_complete_set.txt'}
+  hallmark: {filename: h.all.v2023.2.Hs.symbols.gmt, url: 'https://data.broadinstitute.org/gsea-msigdb/msigdb/release/2023.2.Hs/h.all.v2023.2.Hs.symbols.gmt'}
+  string_links: {filename: 9606.protein.links.v12.0.txt.gz, url: 'https://stringdb-downloads.org/download/protein.links.v12.0/9606.protein.links.v12.0.txt.gz'}
+  string_info: {filename: 9606.protein.info.v12.0.txt.gz, url: 'https://stringdb-downloads.org/download/protein.info.v12.0/9606.protein.info.v12.0.txt.gz'}
+symbols: {locus_groups: ['protein-coding gene', 'non-coding RNA', pseudogene, other]}
+channels:
+  - {name: rna, modality: rnaseq_gene, type: continuous, transform: rna_auto_log}
+  - {name: meth, modality: methylation_gene, type: continuous, transform: methylation_m}
+  - {name: cnv, modality: cnv_log2, type: continuous, transform: cnv_clip}
+  - {name: mut, modality: mutation_binary, type: binary, transform: none}
+cube: {required_channels: [rna], coverage_channel: rna, min_rna_coverage: 0.9, max_patients: null, seed: 42}
+cv: {n_folds: 5, n_repeats: 3, validation_fraction: 0.15, stratify_label: hpv, stratify_event: OS_event}
+nodes: {universe: hallmark_union, top_n: 2000, selection_scope: all_patients, rna_channel_index: 0}
+graphs: {string: {min_score: 700}, coexpr: {k_min: 1, k_max: 50, tolerance: 0.1}, swaps_per_edge: 10}
+model: {hidden: 64, latent: 16, heads: 1, dropout: 0.1, dense_hidden: 512}
+training: {epochs: 60, patience: 10, lr: 0.001, weight_decay: 0.0001, entry_rate: 0.15, node_rate: 0.1, binary_loss: bce}
+evaluation: {bootstrap_n: 1000}
+baselines: {mofa: false}
+interpret: {stability_gate: 0.5, patients_per_fold: 40, permutations: 1000}
+checks: {relaxed: false}
+conditions:
+  - {name: gatv2_string, model: gatv2, graph: string}
+  - {name: gcn_string, model: gcn, graph: string}
+  - {name: sage_string, model: sage, graph: string}
+  - {name: gatv2_string_rewired, model: gatv2, graph: string_rewired}
+  - {name: gatv2_coexpr, model: gatv2, graph: coexpr}
+  - {name: gcn_coexpr, model: gcn, graph: coexpr}
+  - {name: gatv2_coexpr_rewired, model: gatv2, graph: coexpr_rewired}
+  - {name: node_mlp, model: node_mlp, graph: none}
+  - {name: dense_ae, model: dense_ae, graph: none}
+  - {name: gatv2_string_untrained, model: gatv2, graph: string, train: false}
+enable_optional_conditions: false
+optional_conditions:
+  - {name: gatv2_string_latent1, model: gatv2, graph: string, latent: 1}
+  - {name: gatv2_string_heads4, model: gatv2, graph: string, heads: 4}
+  - {name: gatv2_string_mseall, model: gatv2, graph: string, binary_loss: mse}
+endpoints:
+  HNSCC:
+    binary:
+      hpv: {column: SUBTYPE, positive: [HNSC_HPV+], negative: [HNSC_HPV-]}
+    survival:
+      os: {time: OS_days, event: OS_event, primary: true}
+      pfs: {time: PFS_days, event: PFS_event}
+    clinical_covariates: [age, male, stage_num, hpv]
+  BRCA:
+    multiclass:
+      pam50: {column: SUBTYPE, classes: [BRCA_LumA, BRCA_LumB, BRCA_Basal, BRCA_Her2], drop: [BRCA_Normal]}
+    survival:
+      os: {time: OS_days, event: OS_event, primary: true}
+    clinical_covariates: [age, stage_num]

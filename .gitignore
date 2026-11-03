@@ -1,0 +1,40 @@
+# Local environment and scratch state
+.DS_Store
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.claude/
+
+# Large model and tensor artifacts
+*.tar.zst
+*.tar.gz
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.onnx
+*.npy
+*.npz
+*.parquet
+*.joblib
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+
+# Data, outputs, and runners
+data/
+outputs/
+run_gcloud_*.log
+emergency_checkpoint_*
+
+# Credentials and tokens
+*token*.txt
+*.key
+*.pem

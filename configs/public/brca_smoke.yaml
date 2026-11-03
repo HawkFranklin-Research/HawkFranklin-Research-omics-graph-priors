@@ -1,0 +1,13 @@
+# Public smoke test config for TCGA-BRCA
+# Extends v2g smoke configuration with public Hugging Face repository pointer.
+extends: ../v2g/brca_smoke.yaml
+
+data:
+  processed_root: data/hf_tcga
+  reference_root: data/hf_tcga/references
+  output_root: outputs/public
+  hf:
+    repo: HawkFranklin-Research/omics-graph-priors-tcga
+    revision: PUBLIC_DATASET_REVISION
+    local_dir: data/hf_tcga
+    allow_patterns: ['harmonized/tcga/BRCA/*', 'harmonized/MANIFEST.csv', 'clinical/*', 'references/*']

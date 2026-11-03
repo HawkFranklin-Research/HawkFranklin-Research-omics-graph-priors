@@ -1,0 +1,13 @@
+extends: brca_gcloud.yaml
+experiment_name: brca_v2g_probe
+# Same scale as the locally tested configs/v2g/brca_smoke.yaml (round 4 passed), so the cloud probe
+# re-runs an already-validated configuration on the GPU. 100 genes / 120 patients left half the
+# STRING nodes isolated and tripped the graph sanity check (revise-2026/DEPLOY_ERRORS_BRCA.md).
+cube: {max_patients: 240}
+cv: {n_folds: 2, n_repeats: 1}
+nodes: {top_n: 200}
+training: {epochs: 3, patience: null}
+evaluation: {bootstrap_n: 50}
+interpret: {patients_per_fold: 10, permutations: 50}
+checks: {relaxed: true}
+resources: {threads: 4, device: cuda, batch_size: 8}

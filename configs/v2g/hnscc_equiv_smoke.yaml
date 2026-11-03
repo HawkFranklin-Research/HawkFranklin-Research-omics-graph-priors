@@ -1,0 +1,17 @@
+extends: base.yaml
+experiment_name: hnscc_v2g_equiv_smoke
+cube: {max_patients: 120}
+cv: {n_folds: 2, n_repeats: 1}
+nodes: {top_n: 200}
+training: {epochs: 3, patience: null}
+evaluation: {bootstrap_n: 50}
+interpret: {patients_per_fold: 10, permutations: 50}
+checks: {relaxed: true}
+# Keep even the inactive BRCA registry identical to the frozen resolved config.
+endpoints:
+  BRCA:
+    multiclass:
+      pam50: {column: SUBTYPE, classes: [BRCA_LumA, BRCA_LumB, BRCA_Basal, BRCA_Her2], drop: [BRCA_Normal]}
+    survival:
+      os: {time: OS_days, event: OS_event, primary: true}
+    clinical_covariates: [age, stage_num]

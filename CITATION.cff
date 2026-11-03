@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this benchmark codebase, please cite it as below."
+title: "omics-graph-priors: reproduction code"
+version: 1.0.0
+date-released: 2026-11-03
+url: "https://github.com/HawkFranklin-Research/omics-graph-priors"
+repository-code: "https://github.com/HawkFranklin-Research/omics-graph-priors"
+license: Apache-2.0
+authors:
+  - family-names: "Patel"
+    given-names: "Vatsal"
+    affiliation: "HawkFranklin Research"
+    orcid: "TODO-author"
+references:
+  - type: article
+    title: "TODO: paper reference to be added upon acceptance"
+    authors:
+      - family-names: "Patel"
+        given-names: "Vatsal"
