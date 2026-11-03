@@ -55,7 +55,7 @@ pip install -r requirements-v2.txt
 ## Data & Checkpoints
 
 - **Benchmark Dataset:** [HawkFranklin-Research/omics-graph-priors-tcga](https://huggingface.co/datasets/HawkFranklin-Research/omics-graph-priors-tcga)
-  - Pinned Revision: `PUBLIC_DATASET_REVISION`
+  - Pinned Revision: `631cac47ae2cd16fae171dcaef2ec7f77c6b9004`
 - **Trained Model Checkpoints:** [HawkFranklin-Research/omics-graph-priors-models](https://huggingface.co/HawkFranklin-Research/omics-graph-priors-models)
 
 ---

@@ -8,6 +8,6 @@ data:
   output_root: outputs/public
   hf:
     repo: HawkFranklin-Research/omics-graph-priors-tcga
-    revision: PUBLIC_DATASET_REVISION
+    revision: 631cac47ae2cd16fae171dcaef2ec7f77c6b9004
     local_dir: data/hf_tcga
     allow_patterns: ['harmonized/tcga/BRCA/*', 'harmonized/MANIFEST.csv', 'clinical/*', 'references/*']

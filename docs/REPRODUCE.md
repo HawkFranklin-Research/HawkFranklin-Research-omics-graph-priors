@@ -10,8 +10,8 @@ The published benchmark results were generated from the following source code co
 
 | Cancer Cohort | Pipeline Engine | Original Commit | Pinned Dataset Revision | Expected Output Directory |
 |---|---|---|---|---|
-| **TCGA-HNSC** ($n=515$) | `graphr1` (frozen E1) | `df42798` | `PUBLIC_DATASET_REVISION` | `outputs/v2/hnscc_v2_e1/` |
-| **TCGA-BRCA** ($n=1{,}082$) | `graphr1g` (generalized E5) | `552c85d` | `PUBLIC_DATASET_REVISION` | `outputs/v2/brca_v2_e5/` |
+| **TCGA-HNSC** ($n=515$) | `graphr1` (frozen E1) | `df42798` | `631cac47ae2cd16fae171dcaef2ec7f77c6b9004` | `outputs/v2/hnscc_v2_e1/` |
+| **TCGA-BRCA** ($n=1{,}082$) | `graphr1g` (generalized E5) | `552c85d` | `631cac47ae2cd16fae171dcaef2ec7f77c6b9004` | `outputs/v2/brca_v2_e5/` |
 
 ---
 
@@ -76,7 +76,7 @@ To run using the original frozen `scripts/run_v2_gcloud.sh` script, export the t
 
 ```bash
 export HF_DATASET_REPO="HawkFranklin-Research/omics-graph-priors-tcga"
-export HF_DATASET_REVISION="PUBLIC_DATASET_REVISION"
+export HF_DATASET_REVISION="631cac47ae2cd16fae171dcaef2ec7f77c6b9004"
 bash scripts/run_v2_gcloud.sh --config configs/v2/hnscc_gcloud.yaml
 ```
 
